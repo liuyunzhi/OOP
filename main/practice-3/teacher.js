@@ -4,6 +4,7 @@ module.exports = class Teacher extends Person {
     constructor(name, age, clazzes) {
         super(name, age);
         this.clazzes = clazzes;
+        this.clazzes.forEach(clazz => clazz.teachers.push(this));
     }
 
     introduce() {
@@ -18,11 +19,20 @@ module.exports = class Teacher extends Person {
     }
 
     isTeaching(student) {
-        this.clazzes.find(clazz => {
+        let mark = false;
+        this.clazzes.forEach(clazz => {
             if(clazz.hasStudent(student)){
-                return true; 
+                mark = true; 
             }
         });
-        return false;
+        return mark;
+    }
+
+    notifyLeaderAssigned(message) {
+        console.log(message);
+    }
+
+    notifyStudentAppended(message) {
+        console.log(message);
     }
 }
